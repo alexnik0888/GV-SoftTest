@@ -4,10 +4,10 @@ import android.os.Build;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.realm.Realm;
 import maiboroda.o.gv_softtest.data.Task;
 import maiboroda.o.gv_softtest.data.source.TaskDataSource;
-import rx.Observable;
 
 
 public class TaskLocalDataSource implements TaskDataSource {
@@ -28,14 +28,14 @@ public class TaskLocalDataSource implements TaskDataSource {
     public Observable<Task> getTask() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             try (Realm realmInstance = Realm.getDefaultInstance()) {
-                return Observable.from(realmInstance.copyFromRealm(realmInstance.where(Task.class).findAllAsync()));
+                return Observable.fromIterable(realmInstance.copyFromRealm(realmInstance.where(Task.class).findAllAsync()));
             }
         }
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         List<Task> list = realm.copyFromRealm(realm.where(Task.class).findAllAsync());
         realm.commitTransaction();
-        return Observable.from(list);
+        return Observable.fromIterable(list);
     }
 
     public void saveTask(Task task) {

@@ -1,7 +1,7 @@
 package maiboroda.o.gv_softtest.data.source;
 
+import io.reactivex.Observable;
 import maiboroda.o.gv_softtest.data.Task;
-import rx.Observable;
 
 public interface TaskDataSource {
     Observable<Task> getTask();

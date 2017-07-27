@@ -3,8 +3,8 @@ package maiboroda.o.gv_softtest.data.source;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import io.reactivex.Observable;
 import maiboroda.o.gv_softtest.data.Task;
-import rx.Observable;
 
 public class TaskRepository implements TaskDataSource {
 
@@ -32,8 +32,7 @@ public class TaskRepository implements TaskDataSource {
     @Override
     public Observable<Task> getTask() {
         return Observable.concat(taskLocalDataSource.getTask(), getAndSaveRemoteTask())
-                .filter(task -> task != null)
-                .first();
+                .filter(task -> task != null);
     }
 
     @Override

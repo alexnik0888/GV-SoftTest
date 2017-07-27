@@ -1,9 +1,9 @@
 package maiboroda.o.gv_softtest.data.source.remote;
 
+import io.reactivex.Observable;
 import maiboroda.o.gv_softtest.data.Task;
 import maiboroda.o.gv_softtest.data.source.TaskDataSource;
 import maiboroda.o.gv_softtest.util.RetrofitUtil;
-import rx.Observable;
 
 public class TaskRemoteDataSource implements TaskDataSource {
     private static TaskRemoteDataSource instance = null;

@@ -1,10 +1,9 @@
 package maiboroda.o.gv_softtest.main;
 
-import android.util.Log;
-
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import maiboroda.o.gv_softtest.data.source.TaskRepository;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
 
 class MainPresenter implements MainContract.MainPresenter {
     private MainContract.MainView view;
@@ -21,9 +20,7 @@ class MainPresenter implements MainContract.MainPresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(task -> view.setInfo(task),
-                        throwable -> {
-                            view.showError();
-                            Log.d("getTaskError", throwable.getMessage());
-                        }, () -> view.showCompleted());
+                        throwable ->
+                                view.showError(), () -> view.showCompleted());
     }
 }
