@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">GV -SoftTest</string>
+    <string name="state">В роботі</string>
+    <string name="created_title">Створено</string>
+    <string name="registered_title">Зареєстровано</string>
+    <string name="deadline_title">Вирішити до</string>
+    <string name="responsible_title">Відповідальний</string>
+    <string name="responsible_name">Дніпровський МВК</string>
+
+    <string name="all_questions">Всі звернення</string>
+    <string name="map_questions">Звернення на мапі</string>
+    <string name="enter_ac">Увійти в акаунт</string>
+    <string name="in_process">В роботі</string>
+    <string name="ended">Виконано</string>
+</resources>
