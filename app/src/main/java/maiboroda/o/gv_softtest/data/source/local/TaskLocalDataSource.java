@@ -1,15 +1,13 @@
 package maiboroda.o.gv_softtest.data.source.local;
 
-import android.annotation.TargetApi;
 import android.os.Build;
 
+import java.util.List;
+
 import io.realm.Realm;
-import io.realm.RealmObject;
-import io.realm.internal.ManagableObject;
 import maiboroda.o.gv_softtest.data.Task;
 import maiboroda.o.gv_softtest.data.source.TaskDataSource;
 import rx.Observable;
-
 
 
 public class TaskLocalDataSource implements TaskDataSource {
@@ -26,18 +24,30 @@ public class TaskLocalDataSource implements TaskDataSource {
         return instance;
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public Observable<Task> getTask() {
-        try (Realm realmInstance = Realm.getDefaultInstance()) {
-            return Observable.from(realmInstance.copyFromRealm(realmInstance.where(Task.class).findAllAsync()));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try (Realm realmInstance = Realm.getDefaultInstance()) {
+                return Observable.from(realmInstance.copyFromRealm(realmInstance.where(Task.class).findAllAsync()));
+            }
         }
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        List<Task> list = realm.copyFromRealm(realm.where(Task.class).findAllAsync());
+        realm.commitTransaction();
+        return Observable.from(list);
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void saveTask(Task task){
-        try (Realm realmInstance = Realm.getDefaultInstance()) {
-            realmInstance.executeTransaction((realm) -> realm.insertOrUpdate(task));
+    public void saveTask(Task task) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try (Realm realmInstance = Realm.getDefaultInstance()) {
+                realmInstance.executeTransaction((realm) -> realm.insertOrUpdate(task));
+            }
+            return;
         }
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.insertOrUpdate(task);
+        realm.commitTransaction();
     }
 }

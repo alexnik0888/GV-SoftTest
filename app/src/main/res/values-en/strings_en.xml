@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GV -SoftTest</string>
+    <string name="created_title">Created</string>
+    <string name="registered_title">Registered</string>
+    <string name="deadline_title">Deadline</string>
+    <string name="responsible_title">Responsible</string>
+</resources>

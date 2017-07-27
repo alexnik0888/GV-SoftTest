@@ -8,13 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MainComponent">
+        <item name="android:onClick">onViewClick</item>
+    </style>
 
-    <style name="MainTextTheme">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="MainTextTheme" parent="MainComponent">
         <item name="android:textSize">@dimen/main_text_size</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="HeaderTextTheme" parent="MainTextTheme">
+        <item name="android:textSize">@dimen/header_text_size</item>
     </style>
 
     <style name="LeftTextTheme" parent="MainTextTheme">
