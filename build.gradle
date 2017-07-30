@@ -33,7 +33,7 @@ ext {
     runnerVersion = '0.5'
     rulesVersion = '0.5'
     espressoVersion = '2.2.2'
-    daggerVersion = '2.11'
+    daggerVersion = '2.11-rc2'
     rxjavaVersion = '2.0.8'
     rxandroidVersion = '2.0.1'
     retrofitVersion = '2.0.2'

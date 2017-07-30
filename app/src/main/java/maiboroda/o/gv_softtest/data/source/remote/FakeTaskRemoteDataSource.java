@@ -2,21 +2,19 @@ package maiboroda.o.gv_softtest.data.source.remote;
 
 import java.util.Arrays;
 
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import io.reactivex.Observable;
 import maiboroda.o.gv_softtest.data.Task;
 import maiboroda.o.gv_softtest.data.source.TaskDataSource;
 
+@Singleton
 public class FakeTaskRemoteDataSource implements TaskDataSource {
-    private static FakeTaskRemoteDataSource instance = null;
 
-    private FakeTaskRemoteDataSource() {
-    }
-
-    public static FakeTaskRemoteDataSource getInstance() {
-        if (instance == null) {
-            instance = new FakeTaskRemoteDataSource();
-        }
-        return instance;
+    @Inject
+    public FakeTaskRemoteDataSource() {
     }
 
     @Override

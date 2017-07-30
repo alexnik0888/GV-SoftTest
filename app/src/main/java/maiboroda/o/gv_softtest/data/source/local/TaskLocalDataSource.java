@@ -1,27 +1,24 @@
 package maiboroda.o.gv_softtest.data.source.local;
 
+import android.content.Context;
 import android.os.Build;
 
 import java.util.List;
+
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.realm.Realm;
 import maiboroda.o.gv_softtest.data.Task;
 import maiboroda.o.gv_softtest.data.source.TaskDataSource;
 
-
+@Singleton
 public class TaskLocalDataSource implements TaskDataSource {
 
-    private static TaskLocalDataSource instance = null;
-
-    private TaskLocalDataSource() {
-    }
-
-    public static TaskLocalDataSource getInstance() {
-        if (instance == null) {
-            instance = new TaskLocalDataSource();
-        }
-        return instance;
+    @Inject
+    public TaskLocalDataSource() {
     }
 
     @Override

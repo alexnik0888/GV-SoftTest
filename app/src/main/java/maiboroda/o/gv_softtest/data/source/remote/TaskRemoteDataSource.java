@@ -1,21 +1,19 @@
 package maiboroda.o.gv_softtest.data.source.remote;
 
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import io.reactivex.Observable;
 import maiboroda.o.gv_softtest.data.Task;
 import maiboroda.o.gv_softtest.data.source.TaskDataSource;
 import maiboroda.o.gv_softtest.util.RetrofitUtil;
 
+@Singleton
 public class TaskRemoteDataSource implements TaskDataSource {
-    private static TaskRemoteDataSource instance = null;
 
-    private TaskRemoteDataSource() {
-    }
-
-    public static TaskRemoteDataSource getInstance() {
-        if (instance == null) {
-            instance = new TaskRemoteDataSource();
-        }
-        return instance;
+    @Inject
+    public TaskRemoteDataSource() {
     }
 
     @Override

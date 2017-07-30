@@ -1,9 +1,9 @@
 package maiboroda.o.gv_softtest.main;
 
+import android.os.Bundle;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -11,13 +11,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
+import maiboroda.o.gv_softtest.App;
 import maiboroda.o.gv_softtest.R;
 import maiboroda.o.gv_softtest.data.Task;
-import maiboroda.o.gv_softtest.data.source.TaskRepository;
-import maiboroda.o.gv_softtest.data.source.local.TaskLocalDataSource;
-import maiboroda.o.gv_softtest.data.source.remote.FakeTaskRemoteDataSource;
 
 public class MainActivity extends AppCompatActivity implements MainContract.MainView,
         ImageAdapter.OnImageClickListener {
@@ -39,21 +40,23 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     @BindView(R.id.image_recycler_view)
     RecyclerView recycler;
 
+    @Inject
+    MainContract.MainPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        MainContract.MainPresenter presenter = new MainPresenter(this,
-                TaskRepository.getInstance(FakeTaskRemoteDataSource.getInstance(),
-                        TaskLocalDataSource.getInstance()));
-        presenter.getTask();
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        presenter.getTask();
     }
 
     public void onViewClick(View view) {
